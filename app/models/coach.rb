@@ -6,6 +6,7 @@ class Coach < ApplicationRecord
   validates_uniqueness_of :name, on: [:create, :update], message: "must be unique"
   validates_presence_of :name, on: [:create, :update], message: "can't be blank"
   validates_presence_of :cap, on: [:create, :update], message: "can't be blank"
+  validates :cap, numericality: true
   validate :check_cap, on: [:create, :update]
 
   #Scopes

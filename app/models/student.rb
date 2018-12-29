@@ -11,6 +11,7 @@ class Student < ApplicationRecord
 
   #Instance Methods
   def assign_to_coach
+    return if Coach.count == 0
     high_cap = Coach.high_cap
     high_cap_students = high_cap.students.count
     assigned = false

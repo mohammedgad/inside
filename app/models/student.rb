@@ -5,6 +5,7 @@ class Student < ApplicationRecord
   #Validations
   validates_presence_of :name, on: [:create, :update], message: "can't be blank"
   validates_uniqueness_of :name, on: [:create, :update], message: "must be unique"
+  validate :check_coach, on: [:create, :update]
 
   #Callbacks
   before_save :assign_to_coach
@@ -26,6 +27,10 @@ class Student < ApplicationRecord
     if !assigned
       self.coaches << high_cap
     end
+  end
+
+  def check_coach
+    errors.add(:base, "There are no coaches available") if Coach.count == 0
   end
 
 end
